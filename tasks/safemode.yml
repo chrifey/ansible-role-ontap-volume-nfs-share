@@ -7,7 +7,8 @@
   - "{{ netapp_volumes }}"
   when: item.state == "absent"
 
-- set_fact:
+- name: Set fact for Volumes helper
+  set_fact:
     volume_delete_decision: "{{ helper_volume_delete_decision }}"
 
 - name: Safemode for Qtrees helper
@@ -18,12 +19,12 @@
   - "{{ netapp_qtrees }}"
   when: item.state == "absent"
 
-- set_fact:
+- name: Set fact for Qtrees helper
+  set_fact:
     qtree_delete_decision: "{{ helper_qtree_delete_decision }}"
 
 - name: Manage Volumes
-  local_action:
-    module: na_ontap_volume
+  na_ontap_volume:
     name: '{{ item.item.flexvol }}'
     state: '{% if item.user_input | default(omit) == "yes" %}absent{% elif item.item.state == "present" %}present{% endif %}'
     vserver: '{{ item.item.vserver }}'
@@ -45,8 +46,7 @@
   - '{{ volume_delete_decision.results }}'
 
 - name: Manage QTrees
-  local_action:
-    module: na_ontap_qtree
+  na_ontap_qtree:
     name: '{{ item.item.qtree }}'
     state: '{% if item.user_input | default(omit) == "yes" %}absent{% elif item.item.state == "present" %}present{% endif %}'
     vserver: '{{ item.item.vserver }}'
@@ -58,8 +58,7 @@
   - '{{ qtree_delete_decision.results }}'
 
 - name: Manage QTree Export Policy Rule
-  local_action:
-    module: na_ontap_export_policy_rule
+  na_ontap_export_policy_rule:
     policy_name: '{{ item.exportpolicy }}'
     state: '{{ item.state }}'
     vserver: '{{ item.vserver }}'

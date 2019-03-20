@@ -37,9 +37,9 @@ galaxy_info:
   # https://galaxy.ansible.com/api/v1/platforms/
   #
   platforms:
-   - name: Centos
+   - name: CentOS
      versions:
-     - 7.6
+     - all
   # - name: SomePlatform
   #   versions:
   #   - all
