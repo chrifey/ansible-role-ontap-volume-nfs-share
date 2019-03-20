@@ -1,9 +1,6 @@
 ---
 # defaults file for ontap-volume-nfs-share
 netapp_volumes:
-  - { state: '', nacluster: '', vserver: '', flexvol: '', aggregate: '', space_guarantee: '', percent_snapshot_space: '',  size: '', unit: 'gb', exportpolicy: ''  }
-
+  - {state: '', nacluster: '', vserver: '', flexvol: '', aggregate: '', space_guarantee: '', percent_snapshot_space: '',  size: '', unit: 'gb', exportpolicy: ''}
 netapp_qtrees:
-  - { state: '', nacluster: '', vserver: '', qtree: '', flexvol: '',
-      exportpolicy: '', ro_rule: '', rw_rule: '', super_user_security: '', client_match: '' }
-
+  - {state: '', nacluster: '', vserver: '', qtree: '', flexvol: '', exportpolicy: '', ro_rule: '', rw_rule: '', super_user_security: '', client_match: ''}
