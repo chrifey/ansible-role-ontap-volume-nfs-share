@@ -9,7 +9,7 @@
     is_infinite: no
     is_online: yes
     space_guarantee: '{{ item.space_guarantee }}'
-    percent_snapshot_space: '{{ item.percent_snapshot_space }}'    
+    percent_snapshot_space: '{{ item.percent_snapshot_space }}'
     type: 'rw'
     size: '{{ item.size }}'
     size_unit: '{{ item.unit }}'
