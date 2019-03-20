@@ -1,0 +1,3 @@
+[netapp]
+localhost netapp_user=USERNAME netapp_password=SECRET
+

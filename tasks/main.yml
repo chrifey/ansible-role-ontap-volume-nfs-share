@@ -1,0 +1,7 @@
+---
+- include_tasks: no_safemode.yml
+  when: safemode is undefined
+
+- include_tasks: safemode.yml
+  when: safemode is defined
+ 
