@@ -55,7 +55,7 @@ Role Variables
 
 We suggest to create groupvars to specify your environment specific parameters e.g. credentials, ...
 
-First create an inventory file `inventory/hosts`:
+First create an inventory file `inventory/site/hosts`:
 ```
 [netapp]
 localhost netapp_user=USERNAME netapp_password=SECRET
@@ -85,6 +85,8 @@ netapp_qtrees:
       exportpolicy: 'db-nodes', ro_rule: 'sys', rw_rule: 'sys', super_user_security: 'sys', client_match: '0.0.0.0/0' }
 
 ```
+
+With that you can manage multiple volumes in one groupvars file (just add more lines in the netapp_volumes or netapp_qtrees list. You could also create different "sites" with different groupvars e.g. for specific applications that need a subset of volumes/qtrees.
 
 Dependencies
 ------------
