@@ -8,28 +8,8 @@
     policy: '{{ item.exportpolicy }}'
     is_infinite: no
     is_online: yes
-    percent_snapshot_space: '20'
-    type: 'rw'
-    size: '{{ item.size }}'
-    size_unit: '{{ item.unit }}'
-    volume_security_style: 'unix'
-    hostname: '{{ item.nacluster }}'
-    username: '{{ netapp_user }}'
-    password: '{{ netapp_password }}'
-  with_items:
-  - '{{ netapp_volumes }}'
-
-- name: Manage Volumes
-  na_ontap_volume:
-    name: '{{ item.flexvol }}'
-    state: '{{ item.state }}'
-    vserver: '{{ item.vserver }}'
-    aggregate_name: '{{ item.aggregate }}'
-    junction_path: '/{{ item.flexvol }}'
-    policy: '{{ item.exportpolicy }}'
-    is_infinite: no
-    is_online: yes
-    percent_snapshot_space: '20'
+    space_guarantee: '{{ item.space_guarantee }}'
+    percent_snapshot_space: '{{ item.percent_snapshot_space }}'    
     type: 'rw'
     size: '{{ item.size }}'
     size_unit: '{{ item.unit }}'
