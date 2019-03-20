@@ -78,10 +78,10 @@ The following example shows `inventory/site/group_vars/all.yml` to be used with 
 ```yaml
 # Environment specific variables
 netapp_volumes:
-  - { nacluster: 'cluster1.localdomain', vserver: 'vserver1', flexvol: 'flexvol1', space_guarantee: 'none', percent_snapshot_space: '5', aggregate: 'aggr1', size: '10', unit: 'gb', exportpolicy: 'default'  }
+  - { state: 'present', nacluster: 'cluster1.localdomain', vserver: 'vserver1', flexvol: 'flexvol1', space_guarantee: 'none', percent_snapshot_space: '5', aggregate: 'aggr1', size: '10', unit: 'gb', exportpolicy: 'default'  }
 
 netapp_qtrees:
-  - { nacluster: 'cluster1.localdomain', vserver: 'vserver1', qtree: 'qtree1', flexvol: 'flexvol1',
+  - { state: 'present', nacluster: 'cluster1.localdomain', vserver: 'vserver1', qtree: 'qtree1', flexvol: 'flexvol1',
       exportpolicy: 'db-nodes', ro_rule: 'sys', rw_rule: 'sys', super_user_security: 'sys', client_match: '0.0.0.0/0' }
 
 ```
