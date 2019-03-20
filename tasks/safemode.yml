@@ -1,5 +1,5 @@
 ---
-- name: Safemode for Volumes helper 
+- name: Safemode for Volumes helper
   pause:
     prompt: "Do you want to delete the Volume: {{ item.flexvol }} Answer with yes/no!"
   register: helper_volume_delete_decision
@@ -8,7 +8,7 @@
   when: item.state == "absent"
 
 - set_fact:
-    volume_delete_decision: "{{ helper_volume_delete_decision }}"  
+    volume_delete_decision: "{{ helper_volume_delete_decision }}"
 
 - name: Safemode for Qtrees helper
   pause:
@@ -21,47 +21,47 @@
 - set_fact:
     qtree_delete_decision: "{{ helper_qtree_delete_decision }}"
 
-- name: Manage Volumes                       
-  local_action:                              
-    module: na_ontap_volume                  
-    name: '{{ item.item.flexvol }}'                     
-    state: '{% if item.user_input | default(omit) == "yes" %}absent{% elif item.item.state == "present" %}present{% endif %}'                         
-    vserver: '{{ item.item.vserver }}'                     
+- name: Manage Volumes
+  local_action:
+    module: na_ontap_volume
+    name: '{{ item.item.flexvol }}'
+    state: '{% if item.user_input | default(omit) == "yes" %}absent{% elif item.item.state == "present" %}present{% endif %}'
+    vserver: '{{ item.item.vserver }}'
     aggregate_name: '{{ item.item.aggregate }}'
-    junction_path: '/{{ item.item.flexvol }}'                    
-    policy: '{{ item.item.exportpolicy }}'                            
-    is_infinite: no                          
+    junction_path: '/{{ item.item.flexvol }}'
+    policy: '{{ item.item.exportpolicy }}'
+    is_infinite: no
     is_online: yes
-    space_guarantee: '{{ item.item.space_guarantee }}'    
-    percent_snapshot_space: '{{ item.item.percent_snapshot_space }}'             
-    type: 'rw'                               
-    size: '{{ item.item.size }}'            
-    size_unit: '{{ item.item.unit }}'                          
-    volume_security_style: 'unix'            
-    hostname: '{{ item.item.nacluster }}'                
-    username: '{{ netapp_user }}'            
-    password: '{{ netapp_password }}'        
+    space_guarantee: '{{ item.item.space_guarantee }}'
+    percent_snapshot_space: '{{ item.item.percent_snapshot_space }}'
+    type: 'rw'
+    size: '{{ item.item.size }}'
+    size_unit: '{{ item.item.unit }}'
+    volume_security_style: 'unix'
+    hostname: '{{ item.item.nacluster }}'
+    username: '{{ netapp_user }}'
+    password: '{{ netapp_password }}'
   with_items:
   - '{{ volume_delete_decision.results }}'
 
-- name: Manage QTrees                                           
-  local_action:                                                 
-    module: na_ontap_qtree                                      
-    name: '{{ item.item.qtree }}'                                     
-    state: '{% if item.user_input | default(omit) == "yes" %}absent{% elif item.item.state == "present" %}present{% endif %}'                        
-    vserver: '{{ item.item.vserver }}'                                        
-    flexvol_name: '{{ item.item.flexvol }}'                                
-    hostname: '{{ item.item.nacluster }}'                                   
-    username: '{{ netapp_user }}'                               
-    password: '{{ netapp_password }}'                           
-  with_items:                                                   
-  - '{{ qtree_delete_decision.results }}'                                   
+- name: Manage QTrees
+  local_action:
+    module: na_ontap_qtree
+    name: '{{ item.item.qtree }}'
+    state: '{% if item.user_input | default(omit) == "yes" %}absent{% elif item.item.state == "present" %}present{% endif %}'
+    vserver: '{{ item.item.vserver }}'
+    flexvol_name: '{{ item.item.flexvol }}'
+    hostname: '{{ item.item.nacluster }}'
+    username: '{{ netapp_user }}'
+    password: '{{ netapp_password }}'
+  with_items:
+  - '{{ qtree_delete_decision.results }}'
 
 - name: Manage QTree Export Policy Rule
   local_action:
     module: na_ontap_export_policy_rule
     policy_name: '{{ item.exportpolicy }}'
-    state: '{{ item.state }}'                         
+    state: '{{ item.state }}'
     vserver: '{{ item.vserver }}'
     client_match: '{{ item.client_match }}'
     ro_rule: '{{ item.ro_rule }}'

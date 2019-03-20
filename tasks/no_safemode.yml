@@ -1,65 +1,65 @@
-- name: Manage Volumes                       
-  local_action:                              
-    module: na_ontap_volume                  
-    name: '{{ item.flexvol }}'                     
-    state: '{{ item.state }}'                         
-    vserver: '{{ item.vserver }}'                     
+- name: Manage Volumes
+  local_action:
+    module: na_ontap_volume
+    name: '{{ item.flexvol }}'
+    state: '{{ item.state }}'
+    vserver: '{{ item.vserver }}'
     aggregate_name: '{{ item.aggregate }}'
-    junction_path: '/{{ item.flexvol }}'                    
-    policy: '{{ item.exportpolicy }}'                            
-    is_infinite: no                          
-    is_online: yes                           
-    percent_snapshot_space: '20'             
-    type: 'rw'                               
-    size: '{{ item.size }}'            
-    size_unit: '{{ item.unit }}'                          
-    volume_security_style: 'unix'            
-    hostname: '{{ item.nacluster }}'                
-    username: '{{ netapp_user }}'            
-    password: '{{ netapp_password }}'        
+    junction_path: '/{{ item.flexvol }}'
+    policy: '{{ item.exportpolicy }}'
+    is_infinite: no
+    is_online: yes
+    percent_snapshot_space: '20'
+    type: 'rw'
+    size: '{{ item.size }}'
+    size_unit: '{{ item.unit }}'
+    volume_security_style: 'unix'
+    hostname: '{{ item.nacluster }}'
+    username: '{{ netapp_user }}'
+    password: '{{ netapp_password }}'
   with_items:
   - '{{ netapp_volumes }}'
 
-- name: Manage Volumes                       
-  local_action:                              
-    module: na_ontap_volume                  
-    name: '{{ item.flexvol }}'                     
-    state: '{{ item.state }}'                         
-    vserver: '{{ item.vserver }}'                     
+- name: Manage Volumes
+  local_action:
+    module: na_ontap_volume
+    name: '{{ item.flexvol }}'
+    state: '{{ item.state }}'
+    vserver: '{{ item.vserver }}'
     aggregate_name: '{{ item.aggregate }}'
-    junction_path: '/{{ item.flexvol }}'                    
-    policy: '{{ item.exportpolicy }}'                            
-    is_infinite: no                          
-    is_online: yes                           
-    percent_snapshot_space: '20'             
-    type: 'rw'                               
-    size: '{{ item.size }}'            
-    size_unit: '{{ item.unit }}'                          
-    volume_security_style: 'unix'            
-    hostname: '{{ item.nacluster }}'                
-    username: '{{ netapp_user }}'            
-    password: '{{ netapp_password }}'        
+    junction_path: '/{{ item.flexvol }}'
+    policy: '{{ item.exportpolicy }}'
+    is_infinite: no
+    is_online: yes
+    percent_snapshot_space: '20'
+    type: 'rw'
+    size: '{{ item.size }}'
+    size_unit: '{{ item.unit }}'
+    volume_security_style: 'unix'
+    hostname: '{{ item.nacluster }}'
+    username: '{{ netapp_user }}'
+    password: '{{ netapp_password }}'
   with_items:
   - '{{ netapp_volumes }}'
 
-- name: Manage QTrees                                           
-  local_action:                                                 
-    module: na_ontap_qtree                                      
-    name: '{{ item.qtree }}'                                     
-    state: '{{ item.state }}'                         
-    vserver: '{{ item.vserver }}'                                        
-    flexvol_name: '{{ item.flexvol }}'                                
-    hostname: '{{ item.nacluster }}'                                   
-    username: '{{ netapp_user }}'                               
-    password: '{{ netapp_password }}'                           
-  with_items:                                                   
-  - '{{ netapp_qtrees }}'                                   
+- name: Manage QTrees
+  local_action:
+    module: na_ontap_qtree
+    name: '{{ item.qtree }}'
+    state: '{{ item.state }}'
+    vserver: '{{ item.vserver }}'
+    flexvol_name: '{{ item.flexvol }}'
+    hostname: '{{ item.nacluster }}'
+    username: '{{ netapp_user }}'
+    password: '{{ netapp_password }}'
+  with_items:
+  - '{{ netapp_qtrees }}'
 
 - name: Manage QTree Export Policy Rule
   local_action:
     module: na_ontap_export_policy_rule
     policy_name: '{{ item.exportpolicy }}'
-    state: '{{ item.state }}'                         
+    state: '{{ item.state }}'
     vserver: '{{ item.vserver }}'
     client_match: '{{ item.client_match }}'
 #    rule_index: '2'

@@ -23,7 +23,7 @@ Example:
 ansible-playbook -i inventory site.yml -e safemode=true
 ```
 
-If you specify a volume or qtree to be `absent`, the safemode will ask for a confirmation for every volume/qtree that will be deleted. Without safemode variable set it will not ask for a confirmation and delete the volume/qtree. 
+If you specify a volume or qtree to be `absent`, the safemode will ask for a confirmation for every volume/qtree that will be deleted. Without safemode variable set it will not ask for a confirmation and delete the volume/qtree.
 
 
 Requirements

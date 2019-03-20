@@ -1,7 +1,8 @@
 galaxy_info:
   author: Sven Mundschenk, Stefan Gaertner, Steffen Knoth, Christian Fey
   description: Role to configure nfs exports (volume, qtree, policy)
-  company: NetApp + SVA 
+  company: NetApp + SVA
+  role_name: ontap-volume-nfs-share
 
   # If the issue tracker for your role is not on github, uncomment the
   # next line and provide a value
@@ -27,7 +28,7 @@ galaxy_info:
   # this branch. If Travis integration is configured, only notifications for this
   # branch will be accepted. Otherwise, in all cases, the repo's default branch
   # (usually master) will be used.
-  #github_branch:
+  github_branch: master
 
   #
   # Provide a list of supported platforms, and for each platform a list of versions.
@@ -35,11 +36,10 @@ galaxy_info:
   # To view available platforms and versions (or releases), visit:
   # https://galaxy.ansible.com/api/v1/platforms/
   #
-  # platforms:
-  # - name: Fedora
-  #   versions:
-  #   - all
-  #   - 25
+  platforms:
+   - name: Centos
+     versions:
+     - 7.6
   # - name: SomePlatform
   #   versions:
   #   - all
